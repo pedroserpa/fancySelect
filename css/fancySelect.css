@@ -26,6 +26,14 @@ top: 0;
 left: 0;*/
 
 overflow-y: scroll;
+scrollbar-width: none;  /* Firefox */
+}
+.fancySelect-holder .fancySelect::-webkit-scrollbar {
+  display: none;
+}
+/* Hide scrollbar for IE and Edge */
+.fancySelect-holder .fancySelect {
+  -ms-overflow-style: none;
 }
 .fancySelect-holder .fancySelect .fancySelect-item{
     text-align: center;

@@ -1,6 +1,7 @@
 (function($){
-    $.fn.fancySelect=function(options)
+    $.fn.fancySelect=function(options,callback)
     {
+      var selectedVal=null;
         $(this).each(function(){
             var settings=$.extend({
                 /*placeholder:'',*/
@@ -8,6 +9,7 @@
                 data:[]
             },options),
             $element=$(this);
+            options.callback.call($element,selectedVal);
             __init($element,settings);
         });
         function __init($element,settings)
@@ -40,7 +42,6 @@
                 $element.find('.fancySelect-item').removeClass('selected');
 
                 $element.find('.fancySelect-item').each(function( index,object ) {
-                    console.log( index + ": " + $( object ).offset().top );
                     if($( object ).offset().top>elmHeight+90)
                     {
                         $( object ).addClass('selected');
@@ -53,9 +54,9 @@
             e.preventDefault();
             elm.find('.fancySelect-item').removeClass('selected');
             $( e.currentTarget ).addClass('selected');
-            console.log(  $( e.currentTarget ).text() );
-            target.html( $( e.currentTarget ).text() );
-            return $( e.currentTarget ).text();
+            selectedVal=$( e.currentTarget ).text();
+            target.html( selectedVal );
+            return options.callback.call(elm,selectedVal);
         }
     };
 }(jQuery));

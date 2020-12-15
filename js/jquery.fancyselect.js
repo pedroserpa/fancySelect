@@ -9,7 +9,9 @@
                 data:[]
             },options),
             $element=$(this);
-            options.callback.call($element,selectedVal);
+
+            if(options.callback && options.callback!=='undefined')options.callback.call($element,selectedVal);
+
             __init($element,settings);
         });
         function __init($element,settings)
@@ -56,7 +58,7 @@
             $( e.currentTarget ).addClass('selected');
             selectedVal=$( e.currentTarget ).text();
             target.html( selectedVal );
-            return options.callback.call(elm,selectedVal);
+            return (options.callback && options.callback!=='undefined') ? options.callback.call(elm,selectedVal): false;
         }
     };
 }(jQuery));
